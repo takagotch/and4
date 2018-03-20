@@ -1,0 +1,7 @@
+apply plugin: 'realm-android'
+
+classpath "io.realm:realm-gradle-plugin:3.0.0"
+
+compile 'io.realm:android-adapters:2.0.0'
+
+
