@@ -22,5 +22,16 @@ public class MyUtils{
     byte[] byteArray = stream.toByteArray();
     return byteArray;
   }
+
+  public static void tintMenuicon(Context context, MenuItem item,
+		  @ColorRes int color){
+	Drawable normalDrawable = item.getIcon();
+	Drawable wrapDrawable = DrawableCompat.wrap(normalDrawable);
+	DrawableCompat.setTint(wrapDrawable,
+		ContextCompat.getColor(context, color));
+	item.setIcon(wrapDrawable);
+  }
+
+
 }
 
