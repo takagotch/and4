@@ -1,14 +1,24 @@
 public class DiaryListFragment extends Fragment {
   private OnFragmentInteractionListener mListener;
+  private Realm mRealm;
 
   public DiaryListFragment() {}
 
   public static DiaryListFragment newInstance() {
+    DiaryListFragment fragment = new DiaryListFragment();
+    return fragment;
   }
 
   @Override
   public void onCreate(Bundle savedInstanceState){
     super.onCreate(savedInstanceState);
+    mRealm = Realm.getDefaultInstace();
+  }
+
+  @Override
+  public void onDestroy(){
+    super.onDestroy();
+    mrealm.close();
   }
 
   @Override
@@ -22,6 +32,11 @@ public class DiaryListFragment extends Fragment {
 
     recyclerView.setLayoutManager(llm);
 
+    RealmResults<Diary> diaries = mRealm.where(Diary.class).findAll();
+    DiaryRealmAdapter adapter =
+	    new DiaryRealmAdapter(getActivity(), diaries, true);
+
+    recyclerView.setAdapter(adapter);
     return v;
   }
 
@@ -43,6 +58,7 @@ public class DiaryListFragment extends Fragment {
   }
 
   public interface OnFragmentInteractionListener {
+    void onAddDiarySelected();
   }
 }
 
