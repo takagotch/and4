@@ -14,6 +14,15 @@ public class DiaryListFragment extends Fragment {
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	Bundle savedInstanceState){
+    View v = inflater.inflate(R.layout.fragment.diary_list, container, false);
+    RecyclerView  recyclerView = (RecyclerView) v.findViewById(R.id.recycler);
+
+    LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+    llm.setOrientation(LinearLayoutManager.VERTICAL);
+
+    recyclerView.setLayoutManager(llm);
+
+    return v;
   }
 
   @Override
