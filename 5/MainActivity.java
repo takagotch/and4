@@ -20,6 +20,16 @@ public class MainActivity extends AppCompatActivity {
     editWaist = (EditText) findViewById(R.id.waist);
     editinseam = (EditText) findViewById(R.id.inseam);
 
+    findViewById(R.id.height_button)
+	    .setOnClickListener(new View.OnClickListener(){
+	      @Override
+	      public void onClick(View v){
+	        Intent intent =
+			new Intent(MainActivity.this, HeightActivity.class);
+		startActivity(intent);
+	      }
+	    });
+
     editNeck.setText(neck);
     editSleeve.setText(sleeve);
     editWaist.setText(waist);
