@@ -66,4 +66,28 @@ public void onBackButton(View view){
   finish();
 }
 
+private void saveData(int myHand, int comHand, int gameResult){
+  SharedPreferences pref =
+	  PreferenceManager.getDefaultSharedPreferences(this);
+  SharedPreferences.Editor editor = pref.edit();
+
+  int gameCount pref.getInt("GAME+COUNT", 0);
+  int winningStreakCount = pref.getInt("WINNING_STEAK_COUNT", 0);
+  int lastComHand = pref.getInt("LAST_COM_HAND", 0);
+  int lastGameResult = pref.getInt("GAME_RESULT", -1);
+  editor.putInt("GAME_COUNT", gameCount + 1);
+  if(lastGameResult == 2 && gameResult == 2){
+    editor.putInt("WINNEING_STREAK_COUNT", winningSteakCount + 1);
+  } else {
+    editor.putInt("WINNING_STREAK_COUNT", 0);
+  }
+  editor.putInt("LAST_MY_HAND", myHand);
+  editor.putInt("LAST_COM_HAND", comHand);
+  editor.putInt("BEFORE_LAST_COM_HAND", lastComHand);
+  editor.putInt("GAME_RESULT", gameResult);
+
+  editor.commit();
+}
+
+}
 
