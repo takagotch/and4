@@ -14,6 +14,15 @@ public class MainActivity extends AppCompatActivity{
 	    = mRealm.where(Schedule.class).findAll();
     ScheduleAdapter adapter = new ScheduleAdapter(schedules);
     mListView.setAdapter(adapter);
+
+    FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+    fab.setOnClickListener(new View.OnClickListener(){
+      @Override
+      public void onClick(View view){
+        startActivity(new Intent(MainActivity.this,
+		ScheduleEditActivity.class));
+      }
+    });
   }
 
   @Override
