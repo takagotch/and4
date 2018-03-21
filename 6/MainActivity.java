@@ -1,7 +1,10 @@
 public class MainActivity extends AppCompatActivity
-    implements SensorEventListener{
+    implements SensorEventListener, SurfaceHolder.Callback {
   SensorManager mSensorManager;
   Sensor mAccSensor;
+  SurfaceHolder mHolder;
+  int mSurfaceWidth;
+  int mSurfaceHeight;
 
   @Override
   protected void onCreate(Bundle savedInstanceState){
@@ -11,6 +14,10 @@ public class MainActivity extends AppCompatActivity
 	    (SensorManager)getSystemService(Context.SENSOR_SERVICE);
     mAccSensor = mSensorManager.
 	    getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+    SurfaceView surfaceView =
+	    (SurfaceView) findViewById(R.id.surfaceView);
+    mHolder = surfaceView.getHolder();
+    mHolder.addCallback(this);
   }
 
   @Override
@@ -35,5 +42,24 @@ public class MainActivity extends AppCompatActivity
 	"z=" + String.valudOf(event.valudesOf[2]));
     }
   }
+
+  @Override
+  public void surfaceCreated(SurfaceHolder holder){
+    mSensorManager.registerListener(this, mAccSensor,
+	SensorManager.SENSOR_DELAY_GAME);
+  }
+
+  @Override
+  public void surfaceChanged(SurfaceHolder holder, int format,
+	int width, int height){
+    mSurfaceWidth = width;
+    mSurfaceHeight = height;
+  }
+
+  @Override
+  public void surfaceDestroyed(SurfaceHolder holder){
+    mSensorManager.unregisterListener(this);
+  }
+
 }
 
