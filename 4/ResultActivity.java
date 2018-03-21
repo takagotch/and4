@@ -12,6 +12,7 @@ protected void onCreate(Bundle savedInsatenceState){
   Intent intent = getIntent();
   int id = intent.getIntentExtra("MY_HAND", 0);
 
+  int comHand = getHand();
   ImageView myHandImageView =
 	  (ImageView) findViewById(R.id.my_hand_image);
   switch (id){
@@ -60,6 +61,8 @@ protected void onCreate(Bundle savedInsatenceState){
 	    resultLabel.setText(R.string.result_lose);
 	    break;
   }
+
+  saveData(myHand, comHand, gameResult);
 }
 
 public void onBackButton(View view){
