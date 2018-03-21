@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity
 
   @Override
   public void surfaceCreated(SurfaceHolder holder){
+    mFrom = System.currentTimeMillis();
     mSensorManager.registerListener(this, mAccSensor,
 	SensorManager.SENSOR_DELAY_GAME);
   }
@@ -99,6 +100,10 @@ public class MainActivity extends AppCompatActivity
 	int width, int height){
     mSurfaceWidth = width;
     mSurfaceHeight = height;
+    mBallX = width / 2;
+    mBallY = height / 2;
+    mVX = 0;
+    mVY = 0;
   }
 
   @Override
@@ -106,5 +111,13 @@ public class MainActivity extends AppCompatActivity
     mSensorManager.unregisterListener(this);
   }
 
+  private void drawCanvas(){
+    Canvas c = mHolder.lockCanvas();
+    c.drawColor(Color.YELLOW);
+    Paint paint = new Paint();
+    paint.setColor(Color.MAGENTA);
+    c.drawCircle(mBallX, mBallY, RADIUS, paint);
+    mHolder.unlockCanvasAndPost(c);
+  }
 }
 
