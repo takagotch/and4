@@ -23,6 +23,21 @@ public class MainActivity extends AppCompatActivity{
 		ScheduleEditActivity.class));
       }
     });
+
+    mListView.setOnItemClickListener(
+	new AdapterView.OnItemClickListener(){
+	  @Override
+	  public void onItemClick(AdapterView<?> parent, View view,
+		int position, long id){
+	    Schedule schedule =
+		    (Schedule) parent.getItemAtPosition(position);
+	    startActivity(new Intent(MainActivity.this,
+			   ScheduleEditActivity.class)
+			   .putExtra("schedule_id", schedule.getId()));
+	  }
+    });
+
+
   }
 
   @Override
