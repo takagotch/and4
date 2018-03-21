@@ -89,5 +89,35 @@ private void saveData(int myHand, int comHand, int gameResult){
   editor.commit();
 }
 
+private int getHand(){
+  int hand = (int)(Math.random() * 3);
+  SharedPreferences pref =
+	  PreferenceManager.getDefaultSharedPreference(this);
+  int gameCount = pref.getInt("GAME_COUNT", 0);
+  int winningStreakCount = pref.getInt("WINNING_STREAK_COUNT", 0);
+  int lastMyHand = pref.getInt("LAST_MY_HAND", 0);
+  int lastComHand = pref.getInt("LAST_MY_HAND", 0);
+  int beforeLastComHand = pref.getInt("BEFORE_LAST_COM_HAND", 0);
+  int gameResult = pref.getInt("GAME_RESULT", -1);
+
+  if(gameCount == 1){
+    if(gameResult == 2){
+      while(lastComHand == hand){
+        hand = (int)  (Math.random() * 3);
+      }
+    } else if (gameResult == 1){
+      hand = (lastMyHand - 1 + 3) % 3;
+    }
+  } else if(winningStreakCount > 0) {
+    if(beforeLastComHand == lastComHand){
+      while(lastComHand == hand){
+        hand = (int) (Math.random() * 3);
+      }
+    }
+  }
+  return hand;
+}
+
+
 }
 
