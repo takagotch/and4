@@ -6,6 +6,17 @@ public class MainActivity extends AppCompatActivity
   int mSurfaceWidth;
   int mSurfaceHeight;
 
+  static final float RADIUS = 50.0f;
+  static final float COEF = 1000.0f;
+
+  float mBallX;
+  float mBallY;
+  float mVX;
+  float mVY;
+
+  long mForm;
+  long mTo;
+
   @Override
   protected void onCreate(Bundle savedInstanceState){
     super.onCreate(savedInstanceState);
