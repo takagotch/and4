@@ -24,12 +24,26 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onFinish(){
       mTimerText.setText("0:00");
+      mSoundPool.play(mSoundResId, 1.0f,1.0f,0.0,1.0f);
     }
   }
 
   @Override
   protected void onFinished(){
     mTimerText.setText("0:00");
+  }
+
+  @Override
+  protected void onResume(){
+    super.onResume();
+    mSoundPool = new SoundPool(2, AudioManager.STREAM_ALARM, 0);
+    mSoundPool = mSoundPool.load(this, R.raw.bellsound, 1);
+  }
+
+  @Override
+  protected void onPause(){
+    super.onPause();
+    mSoundPool.release();
   }
 }
 
@@ -58,5 +72,33 @@ protected void onCreate(Bundle savedInstanceState){
     }
   });
 }
+
+//
+//AudioAttribute audioAttributes = new AudioAttributes.Builder()
+//  .setUsage(AudioAttributes.USAGE_ALARM)
+//  .build();
+//mSoundPool = new SoundPool.Builder()
+//  .setMaxStream(1)
+//  .setAudioAttributes(audioAttributes)
+//  .build();
+//
+//@Override
+//protected void onResume(){
+//  super.onResume();
+//
+//  if(Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP){
+//    mSoundPool = new SoundPool(1, AudioManager.STREAM_ALARM, 0);
+//  } else {
+//    AudioAttributes audioAttributes = new AudioAttributes.Builder()
+//      .setUsage(AudioAttributes.USAGE_ALARM)
+//      .build();
+//    mSoundPool = new SoundPool.Builder()
+//      .setMaxStream(1)
+//      .setAudioAttributes(audioAttributes)
+//      .build();
+//  }
+//  mSoundResId = mSoundPool.load(this, R.raw.bellsound, 1);
+//}
+//
 
 

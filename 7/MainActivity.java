@@ -63,6 +63,13 @@ public clsss MainAcitivty extends AppCompatActivity{
 
 public void onSlide showButton(View view){
   mIsSlideshow = !mIsSlideshow;
+
+  if(mIsSlideshow){
+    mMediaPlayer.start();
+  } else {
+    mMediaPlayer.pause();
+    mMediaPlayer.seekTo(0);
+  }
 }
 
 
