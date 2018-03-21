@@ -12,3 +12,10 @@ public class MainActivity extends AppCompatActivity {
   }
 }
 
+public void onJankenButtonTapped(View view){
+  Intent intent = new Intent(this, ResultActivity.class);
+  intent.putExtra("MY_HAND", view.getId());
+  startActivity(intent);
+}
+
+
