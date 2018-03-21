@@ -51,6 +51,40 @@ public class MainActivity extends AppCompatActivity
 	"x=" + String.valueOf(event.valuesOf[0]) +
 	"y=" + String.valudOf(event.valudeOf[1]) +
 	"z=" + String.valudOf(event.valudesOf[2]));
+
+      float x = -event.values[0];
+      float y = event.values[1];
+      float z = event.values[2];
+
+      mTo = System.currentTimeMillis();
+      float t = (float)(mTo - mFrom);
+      t = t / 1000.0f;
+
+      float dx = mVX * t + x * t * t / 2.0f;
+      float dy = mVY * t + y * t * t / 2.0f;
+      mBallX = mBallX + dx * COEF;
+      mBallY = mBallY + dy * COEF;
+      mVX = mVX + x * t;
+      mVY = mVY + y * t;
+
+      if(mBallX - RADIUS < 0 && mVX < 0){
+        mVX = -mVX / 1.5f;
+	mBallX = RADIUS;
+      } else if(mBallX + RADIUS > mSurfaceWidth && mVX > 0){
+        mVX = -mVX / 1.5f;
+	mBallX = mSurfaceWidth - RADIUS;
+      }
+
+      if(mBallY - RADIUS < 0 && mVY < 0){
+        mVY = -mVY / 1.5f;
+	mBallY = RADIUS;
+      } else if(mBallY + RADIUS > mSurfaceHeight && mVY > 0){
+        mVY = -mVY / 1.5fl
+	mBallY = mSurfaceHeight - RADIUS;
+      }
+
+      mFrom = System.currentTimeMillis();
+      drawCanvas();
     }
   }
 
