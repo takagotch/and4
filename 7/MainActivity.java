@@ -37,3 +37,29 @@ public clsss MainAcitivty extends AppCompatActivity{
   }
 }
 
+private void movePosition(int move){
+
+  mPosition = mPosition + move;
+  if(mPosition >= mImageResources.length){
+    mPosition = 0;
+  } else if(mPosition < 0){
+    mPosition = mImageResources.length - 1;
+  }
+  mImageSwitcher.setImageResource(mImageResources[mPosition]);
+}
+
+public void onPrevButtonTapped(View view){
+  mImageSwitcher.setInAnimation(this, android.R.anim.fade_in);
+  mImageSwitcher.setOutAnimation(this, android.R.anim.fade_out);
+  movePosition(-1);
+  findViewById(R.id.imageView).animate().setDuration(1000).alpha(0.0f);
+}
+
+public void onNextButton(View view){
+  mImageSwitcher.setInAnimation(this, android.R.anim.slide_in_left);
+  mImageSwitcher.setOutAnimation(this, android.R.anim.slide_out_right);
+  movePosition(1);
+  findViewById(R.id.imageView).animate().setDuration(1000).alpha(0.0f);
+}
+
+
