@@ -65,7 +65,6 @@ public class SchduleEditActivity extends AppCompatActivity {
         .setActionTextColor(Color.YELLOW)
 	.show();
     } else {
-    
     mRealm.executeTransaction(new Realm.Transaction(){
       @Override
       pulbic void execute(Realm realm){
@@ -80,10 +79,22 @@ public class SchduleEditActivity extends AppCompatActivity {
       }
     });
     Toast.makeText(this, "ADD", Toast.LENGTH_SHORT).show();
-    finish();
-    
+    finish();   
+  }
   }
 
+  public void onDeleteTapped(View view){
+    long scheduleId = getIntent().getLongExtra("schedule_id", -1);
+    if(scheduleId != -1){
+      mRealm.executeTransaction(new Realm.Transaction(){
+        @Override
+	public void execute(Realm realm){
+	 Schedule schedule = realm.where(Schedule.class)
+		 .equalTo("id", scheduleId).findFrist();
+	 schedule.deleteFromRealm();
+	}
+      });
+    }
   }
 }
 
