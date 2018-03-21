@@ -119,5 +119,12 @@ public class MainActivity extends AppCompatActivity
     c.drawCircle(mBallX, mBallY, RADIUS, paint);
     mHolder.unlockCanvasAndPost(c);
   }
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState){
+    super.onCreate(savedInstanceState);
+    setRequestedOrientaion(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    setContentView(R.layout.activity_main);
+  }
 }
 
