@@ -20,6 +20,27 @@ public clsss MainAcitivty extends AppCompatActivity{
     , R.drawable.slide08, R.drawable.slide09};
   int mPosition = 0;
 
+  boolean mIsSlideshow = false;
+  MediaPlayer mMediaPlayer;
+
+  public class MainTimerTask extends TimerTask {
+    @Override
+    public void run(){
+      if(mIsSlideshow){
+        mHandler.post(new Runnable(){
+	  @Override
+	  public void run(){
+	    movePosition(1);
+	  }
+	});
+      }
+    }
+  }
+
+  Timer mTimer = new Timer();
+  TimerTask mTimerTask = new MainTimerTask();
+  Handler mHandler = new Handler();
+
   @Override
   protected void onCreate(Bundle savedInstanceState){
     super.onCreate(savedInstanceState);
@@ -34,8 +55,16 @@ public clsss MainAcitivty extends AppCompatActivity{
 	}
     });
     mImageSwitcher.setImageResources(mImageResources[0]);
+    mTimer.schedule(mTimerTask, 0, 5000);
+    mMediaPlayer = MediaPlayer.create(this, R.raw.getdown);
+    mMediaPlayer.setLooping(true);
   }
 }
+
+public void onSlide showButton(View view){
+  mIsSlideshow = !mIsSlideshow;
+}
+
 
 private void movePosition(int move){
 
