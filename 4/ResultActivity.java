@@ -62,4 +62,8 @@ protected void onCreate(Bundle savedInsatenceState){
   }
 }
 
+public void onBackButton(View view){
+  finish();
+}
+
 
