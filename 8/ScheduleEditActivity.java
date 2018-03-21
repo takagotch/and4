@@ -3,6 +3,7 @@ public class SchduleEditActivity extends AppCompatActivity {
   private mDateEdit;
   private mTitleEdit;
   private mDetailEdit;
+  Button mDelete;
 
   @Override
   protected void onCreate(Bundle savedInstanceState){
@@ -12,17 +13,21 @@ public class SchduleEditActivity extends AppCompatActivity {
     mDateEdit = (EditText) findViewById(R.id.dateEdit);
     mTitleEdit (EditText) findViewById(R.id.titleEdit);
     mDatailEdit = (EditText) findViewById(R.id.detailEdit);
+    mDelete = (Button) findViewById(R.id.delete);
 
     long scheduleId = getIntent().getLongExtra("schedule_id", -1);
     if(scheduleId != -1){
       RealmResults<Schedule> results = mRealm.where(Schedule.class)
 	      .equalTo("id", scheduleId).findAll();
       Schedule schedule = results.first();
-      SimpleDateFormat sdf = results.first("yyyy/MM/dd");
+      SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
       String date = sdf.format(schedule.getDate());
       mDateEdit.setText(date);
       mTitleEdit.setText(schedule.getTitle());
       mDetailEdit.setText(schedule.getDetail());
+      mDelete.setVisibility(View.VISIBLE);
+    } else {
+      mDelete.setVisibility(View.INVISIBLE);
     }
   }
 
